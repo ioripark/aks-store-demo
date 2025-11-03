@@ -1,0 +1,62 @@
+namespace: hello
+
+image:
+  registry: acrkcjk.azurecr.io
+  repository: sample/helloworld
+  tag: v0.2
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+javaOptions: "-XX:InitialRAMPercentage=50 -XX:MinRAMPercentage=50 -XX:MaxRAMPercentage=75 -XX:MetaspaceSize=128m -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/dumps"
+
+service:
+  name: hello
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+probes:
+  liveness:
+    tcp:
+      port: 8080
+    failureThreshold: 1
+    periodSeconds: 10
+  startup:
+    tcp:
+      port: 8080
+    failureThreshold: 30
+    periodSeconds: 10
+  readiness:
+    http:
+      path: /
+      port: 8080
+    failureThreshold: 1
+    periodSeconds: 10
+
+resources:
+  requests:
+    cpu: "500m"
+    memory: "1Gi"
+  limits:
+    cpu: "1"
+    memory: "1Gi"
+
+ingress:
+  enabled: true
+  name: ing-hello
+  classAnnotation: "azure/application-gateway"
+  hosts:
+    - host: ""     
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []         
+
+labels:
+  app: hello
+
+autoscaling:
+  enabled: false
+
+extraEnv: []

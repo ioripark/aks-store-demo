@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cm-helloworld
+  namespace: {{ .Values.namespace }}
+data:
+  _JAVA_OPTIONS: {{ .Values.javaOptions | quote }}

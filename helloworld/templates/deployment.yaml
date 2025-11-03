@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.labels.app }}
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Values.labels.app }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.labels.app }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.labels.app }}
+    spec:
+      containers:
+      - name: {{ .Values.labels.app }}
+        image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: {{ .Values.resources.requests.cpu | quote }}
+            memory: {{ .Values.resources.requests.memory | quote }}
+          limits:
+            cpu: {{ .Values.resources.limits.cpu | quote }}
+            memory: {{ .Values.resources.limits.memory | quote }}
+        envFrom:
+        - configMapRef:
+            name: cm-helloworld
+        {{- if .Values.probes.liveness }}
+        livenessProbe:
+          {{- if .Values.probes.liveness.tcp }}
+          tcpSocket:
+            port: {{ .Values.probes.liveness.tcp.port }}
+          {{- end }}
+          failureThreshold: {{ .Values.probes.liveness.failureThreshold }}
+          periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
+        {{- end }}
+        {{- if .Values.probes.startup }}
+        startupProbe:
+          {{- if .Values.probes.startup.tcp }}
+          tcpSocket:
+            port: {{ .Values.probes.startup.tcp.port }}
+          {{- end }}
+          failureThreshold: {{ .Values.probes.startup.failureThreshold }}
+          periodSeconds: {{ .Values.probes.startup.periodSeconds }}
+        {{- end }}
+        {{- if .Values.probes.readiness }}
+        readinessProbe:
+          {{- if .Values.probes.readiness.http }}
+          httpGet:
+            path: {{ .Values.probes.readiness.http.path }}
+            port: {{ .Values.probes.readiness.http.port }}
+          {{- end }}
+          failureThreshold: {{ .Values.probes.readiness.failureThreshold }}
+          periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
+        {{- end }}
+        {{- if .Values.extraEnv }}
+        env:
+        {{- range .Values.extraEnv }}
+        - name: {{ .name }}
+          value: {{ .value | quote }}
+        {{- end }}
+        {{- end }}
