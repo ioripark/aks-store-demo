@@ -48,7 +48,7 @@ env:
   CLUSTER_NAME: aksfltwithhubmng
   CLUSTER_RESOURCE_GROUP: rg-aks-prd
   CLUSTER_RESOURCE_TYPE: Microsoft.ContainerService/fleets
-  DOCKER_FILE: ./helloworld/Dockefile
+  DOCKER_FILE: ./helloworld/Dockerfile
   BUILD_CONTEXT_PATH: ./
   CHART_PATH: ./helm-charts
   CHART_OVERRIDE_PATH: ./helm-charts/helloworld/values.yaml
