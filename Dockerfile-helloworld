@@ -1,0 +1,8 @@
+FROM openjdk:17-slim 
+#FROM eclipse-temurin:17.0.16_8-jdk-ubi9-minimal 
+
+COPY target/myproject-0.0.1-SNAPSHOT.jar app.jar
+
+EXPOSE 8080
+
+CMD ["java", "-Xmx1g", "-jar", "app.jar"]
