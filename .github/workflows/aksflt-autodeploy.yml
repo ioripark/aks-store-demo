@@ -53,8 +53,8 @@ env:
   CHART_PATH: ./helm-charts/helloworld
   CHART_OVERRIDE_PATH: ./helm-charts/helloworld/values.yaml
   CHART_OVERRIDES: image.repository=acrkcjk.azurecr.io/sample/helloworld,image.tag=${{ github.sha }},namespace=hello
-  NAMESPACE: default
-  ENABLENAMESPACECREATION: false
+  NAMESPACE: hello
+  ENABLENAMESPACECREATION: true
   AUTH_TYPE: SERVICE_PRINCIPAL
 
 jobs:
