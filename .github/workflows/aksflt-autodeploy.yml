@@ -38,7 +38,7 @@ name: aksflt-autodeploy
 
 on:
   push:
-    branches: [main]
+    branches: [main1111]
   workflow_dispatch:
 
 env:
