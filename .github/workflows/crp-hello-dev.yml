@@ -50,7 +50,7 @@ env:
   CLUSTER_RESOURCE_TYPE: microsoft.containerservice/fleets
   DOCKER_FILE: ./helloworld/Dockerfile
   BUILD_CONTEXT_PATH: ./helloworld
-  CHART_PATH: ./helm-charts
+  CHART_PATH: ./helm-charts/helloworld
   CHART_OVERRIDE_PATH: ./helm-charts/helloworld/values.yaml
   CHART_OVERRIDES: image.repository=acrkcjk.azurecr.io/sample/helloworld/dev,image.tag=${{ github.sha }},env=dev
   NAMESPACE: hello
