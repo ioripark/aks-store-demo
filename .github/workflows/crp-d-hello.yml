@@ -52,7 +52,7 @@ env:
   BUILD_CONTEXT_PATH: ./helloworld
   CHART_PATH: ./helm-charts/helloworld
   CHART_OVERRIDE_PATH: ./helm-charts/helloworld/values.yaml
-  CHART_OVERRIDES: image.repository=acrkcjk.azurecr.io/sample/helloworld/dev,image.tag=${{ github.sha }},env=dev,namespace=d-hello
+  CHART_OVERRIDES: image.repository=acrkcjk.azurecr.io/sample/helloworld/dev,image.tag=${{ github.sha }},env=dev,namespace=d-hello,resources.limits.memory=1100Mi
   NAMESPACE: d-hello
   ENABLENAMESPACECREATION: false
   AUTH_TYPE: SERVICE_PRINCIPAL
