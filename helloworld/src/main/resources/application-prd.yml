@@ -1,7 +1,2 @@
-spring:
-  profiles:
-    active: prd  
-
-logging:
-  level:
-    org.springframework: INFO
+app:
+  environment: prd
