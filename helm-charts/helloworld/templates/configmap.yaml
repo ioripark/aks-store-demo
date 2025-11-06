@@ -6,3 +6,4 @@ metadata:
 data:
   _JAVA_OPTIONS: {{ .Values.javaOptions | quote }}
   spring_profiles_active: {{ .Values.env }} 
+  
