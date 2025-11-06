@@ -34,25 +34,25 @@
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
 # For more options with the actions used below please refer to https://github.com/Azure/login
 
-name: aksflt-autodeploy
+name: crp-hello-prd
 
 on:
   push:
-    branches: [main1111]
+    branches: [main]
   workflow_dispatch:
 
 env:
   ACR_RESOURCE_GROUP: rg-kc-jk-1
   AZURE_CONTAINER_REGISTRY: acrkcjk
-  CONTAINER_NAME: sample/helloworld
+  CONTAINER_NAME: sample/helloworld/prd
   CLUSTER_NAME: aksfltwithhubmng
   CLUSTER_RESOURCE_GROUP: rg-aks-prd
-  CLUSTER_RESOURCE_TYPE: Microsoft.ContainerService/fleets
+  CLUSTER_RESOURCE_TYPE: microsoft.containerservice/fleets
   DOCKER_FILE: ./helloworld/Dockerfile
   BUILD_CONTEXT_PATH: ./helloworld
   CHART_PATH: ./helm-charts/helloworld
   CHART_OVERRIDE_PATH: ./helm-charts/helloworld/values.yaml
-  CHART_OVERRIDES: image.registry=acrkcjk.azurecr.io,image.repository=sample/helloworld,image.tag=${{ github.sha }},namespace=hello
+  CHART_OVERRIDES: image.repository=acrkcjk.azurecr.io/sample/helloworld/prd,image.tag=${{ github.sha }},env=prd
   NAMESPACE: hello
   ENABLENAMESPACECREATION: false
   AUTH_TYPE: SERVICE_PRINCIPAL
