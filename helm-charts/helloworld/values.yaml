@@ -1,5 +1,7 @@
 namespace: hello
 
+env: dev
+
 image:
   registry: acrkcjk.azurecr.io
   repository: sample/helloworld
