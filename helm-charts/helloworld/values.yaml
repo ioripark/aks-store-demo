@@ -29,15 +29,15 @@ probes:
     periodSeconds: 10
   readiness:
     http:
-      path: /
+      path: /actuator/health
       port: 8080
     failureThreshold: 1
     periodSeconds: 10
 
 resources:
   requests:
-    cpu: "5m"
-    memory: "128Mi"
+    cpu: "200m"
+    memory: "256Mi"
   limits:
     cpu: "1"
     memory: "1Gi"

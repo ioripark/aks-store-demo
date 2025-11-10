@@ -17,7 +17,7 @@ public class MyApplication {
 	@RequestMapping("/")
 	String home() {
 		logger.debug("debug hello");
-		logger.info("info");
+		logger.info("info hello from home endpoint");
 		return "Hello World!";
 	}
 

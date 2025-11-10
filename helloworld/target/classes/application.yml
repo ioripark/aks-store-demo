@@ -8,6 +8,21 @@ spring:
   profiles:
     active: local  
 
+# Actuator configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: when-authorized
+
 logging:
   level:
-    root: DEBUG
+    root: INFO
+    # Keep application logs visible
+    com.example: INFO
+    # Only disable actuator health check logs
+    org.springframework.boot.actuator: OFF
+    org.springframework.web.servlet.DispatcherServlet: WARN
